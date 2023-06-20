@@ -35,7 +35,7 @@ app.get('/search', async (req, res) => {
       const page = await browser.newPage();
 
       await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3');
-      await page.goto('https://www.amazon.in/');
+      await page.goto('https://www.amazon.com/');
       await page.type('#twotabsearchtextbox', title);
       await page.click('#nav-search-submit-button');
       await page.waitForNavigation();
@@ -44,15 +44,17 @@ app.get('/search', async (req, res) => {
 
       const productsOnPage = await page.evaluate(() => {
         const products = [];
-        const productCards = document.querySelectorAll('.s-result-item');
+        const productCards = document.querySelectorAll('.s-result-item .s-card-border');
         productCards.forEach((card) => {
-          const title = card.querySelector('.a-text-normal');
-          const price = card.querySelector('.a-price-whole');
+          const name = card.querySelector('h2 > a > span');
+          const wholePrice = card.querySelector('.a-price-whole');
+          const fractionPrice = card.querySelector('.a-price-fraction');
           const image = card.querySelector('img');
-          if (title && price && image) {
+          if (name && wholePrice && image) {
+            const formattedPrice = `${parseInt(wholePrice.innerText)}.${parseInt(fractionPrice.innerText)}`;
             const product = {
-              title: title.innerText,
-              price: parseFloat(price.innerText.replace(/[^0-9.]/g, '')),
+              name: name.innerText,
+              price: parseFloat(formattedPrice),
               image: image.getAttribute('src')
             };
             products.push(product);
@@ -95,7 +97,7 @@ app.post('/search', async (req, res) => {
       const page = await browser.newPage();
 
       await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3');
-      await page.goto('https://www.amazon.in/');
+      await page.goto('https://www.amazon.com/');
       await page.type('#twotabsearchtextbox', title);
       await page.click('#nav-search-submit-button');
       await page.waitForNavigation();
@@ -104,15 +106,17 @@ app.post('/search', async (req, res) => {
 
       const productsOnPage = await page.evaluate(() => {
         const products = [];
-        const productCards = document.querySelectorAll('.s-result-item');
+        const productCards = document.querySelectorAll('.s-result-item .s-card-border');
         productCards.forEach((card) => {
-          const title = card.querySelector('.a-text-normal');
-          const price = card.querySelector('.a-price-whole');
+          const name = card.querySelector('h2 > a > span');
+          const wholePrice = card.querySelector('.a-price-whole');
+          const fractionPrice = card.querySelector('.a-price-fraction');
           const image = card.querySelector('img');
-          if (title && price && image) {
+          if (name && wholePrice && image) {
+            const formattedPrice = `${parseInt(wholePrice.innerText)}.${parseInt(fractionPrice.innerText)}`;
             const product = {
-              title: title.innerText,
-              price: parseFloat(price.innerText.replace(/[^0-9.]/g, '')),
+              name: name.innerText,
+              price: parseFloat(formattedPrice),
               image: image.getAttribute('src')
             };
             products.push(product);

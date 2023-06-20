@@ -128,9 +128,13 @@ Feel free to explore the Swagger documentation and leverage it to understand the
 
 ![GET Request](Images/get.png)
 
+![GET Output](Images/get_output.png)
+
 The above image shows an example of a GET request made to the API. It demonstrates how to retrieve product data by providing a search query.
 
 ![POST Request](Images/post.png)
+
+![POST Output](Images/post_output.png)
 
 The above image illustrates an example of a POST request made to the API. It showcases how to submit a search query and receive product data in the response.
 
