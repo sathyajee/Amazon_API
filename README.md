@@ -19,9 +19,8 @@ Before running the project, make sure you have the following:
 
 ## Installation and Setup
 
-1. Clone the repository: `git clone https://github.com/Percussor-hash/Amazon_API.git`
-2. Install the dependencies: `npm install`
-3. Configure the necessary environment variables (such as `PORT` for the server).
+1. Clone the repository: `git clone https://github.com/sathyajee/Amazon_API.git`
+2. Configure the necessary environment variables (such as `PORT` for the server).
 
 ## Usage
 
@@ -34,8 +33,6 @@ Before running the project, make sure you have the following:
 
 ### Install all the node packages required
 * ```cd Final_API```
-
-* ```npm init``` (keep all the values to default.)
 
 * ```npm install```
 
@@ -115,7 +112,7 @@ The API is documented using the Swagger (OpenAPI) specification, providing a com
 To access the Swagger documentation, follow these steps:
 
 1. Start the application on your local machine.
-2. Go to "https://editor.swagger.io/" website and paste api.yaml code in the editor. 
+2. Go to "https://editor.swagger.io/" website and copy the contents of file "api.yaml" to the editor. 
 
 The Swagger UI interface will be displayed, presenting a user-friendly view of the API documentation. You can interactively test the endpoints, view example requests and responses, and understand the expected data formats.
 
